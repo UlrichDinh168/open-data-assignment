@@ -1,11 +1,31 @@
 import express from "express";
 import morgan from "morgan";
-import { Mongoose } from "mongoose";
+import mongoose from "mongoose";
+import userRoutes from "./api/routes";
 
 const server = express();
 
 server.use(morgan("dev"));
 server.use(express.json());
+
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+
+    console.log("MongoDB connection SUCCESS");
+  } catch (error) {
+    console.error("MongoDB connection FAIL");
+    process.exit(1);
+  }
+};
+
+connectDB();
+
+// Routes
+app.use("/user", userRoutes);
 
 server.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
