@@ -1,33 +1,35 @@
 import express from "express";
 import morgan from "morgan";
 import mongoose from "mongoose";
-import userRoutes from "./api/routes";
+import userRoutes from "../server/api/routes/user.js";
+import cors from "cors";
+import dotenv from "dotenv";
 
-const server = express();
+dotenv.config();
 
-server.use(morgan("dev"));
-server.use(express.json());
+const PORT = process.env.PORT || 5000;
+const app = express();
 
-const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+app.use(morgan("dev"));
+app.use(express.json());
+app.use(cors());
 
-    console.log("MongoDB connection SUCCESS");
-  } catch (error) {
-    console.error("MongoDB connection FAIL");
-    process.exit(1);
-  }
-};
-
-connectDB();
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() =>
+    app.listen(PORT, () =>
+      console.log(`Server Running on Port: http://localhost:${PORT}`)
+    )
+  )
+  .catch((error) => console.log(`${error} did not connect`));
 
 // Routes
 app.use("/user", userRoutes);
 
-server.use((req, res, next) => {
+app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
@@ -40,23 +42,17 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use((req, res, next) => {
+app.use((req, res, next) => {
   const error = new Error("Not found");
   error.status = 404;
   next(error);
 });
 
-server.use((error, req, res, next) => {
+app.use((error, req, res, next) => {
   res.status(error.status || 500);
   res.json({
     error: {
       message: error.message,
     },
   });
-});
-
-const port = process.env.PORT || 5000;
-
-server.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
 });
