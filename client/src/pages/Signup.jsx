@@ -1,21 +1,23 @@
 import React, { useState } from "react";
-import { connect, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { validator, defaultValidatorError } from "../../helpers/validator";
+import { validator } from "../helpers/validator";
 
 // Actions
-import { userActions } from "../../actions";
+import { signup } from "../actions/userActions";
 
 // Components
-import Button from "../../shared/components/Button";
-import Input from "../../shared/components/Input";
+import Button from "../shared/Button";
+import Input from "../shared/Input";
 
 // Constants
-import { ROUTER_PATH } from "../../constants";
+import { ROUTER_PATH } from "../constants";
 
 // Reducers
 
 const SignUp = () => {
+  const [isConfirmationStep, setIsConfirmationStep] = useState(false);
+
   const dispatch = useDispatch();
   const history = useHistory();
   const [form, setForm] = useState({
@@ -29,9 +31,8 @@ const SignUp = () => {
 
   const onSignup = (e) => {
     e.preventDefault();
-    return dispatch(userActions.signup(form)).then(() =>
-      setIsConfirmationStep(true)
-    );
+    return dispatch(signup(form));
+    // .then(() => setIsConfirmationStep(true));
   };
 
   const toLoginPage = () => {
@@ -42,9 +43,7 @@ const SignUp = () => {
   const renderConfirmation = () => {
     return (
       <div className="container">
-        <div className="description">
-          {t("sign_up.account_has_been_created")}
-        </div>
+        <div className="description">Account_has_been_created</div>
         <Button
           text="Go to login"
           onClick={toLoginPage}

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import withLoadingScreen from "shared/components/Loading";
-import { userActions } from "../../actions";
-import { validator } from "../../helpers/validator";
-import { ROUTER_PATH } from "../../constants";
-import Input from "../../shared/components/Input";
-import Button from "../../shared/components/Button";
+import { useHistory } from "react-router-dom";
+// import withLoadingScreen from "shared/components/Loading";
+import { login } from "../actions/userActions";
+import { validator } from "../helpers/validator";
+import { ROUTER_PATH } from "../constants";
+import Input from "../shared/Input";
+import Button from "../shared/Button";
 
 const Login = () => {
   // const Login = ({ showLoading, hideLoading }) => {
@@ -24,7 +24,7 @@ const Login = () => {
     e.preventDefault();
     try {
       //   showLoading();
-      await dispatch(userActions.login(form)).then((res) => {
+      await dispatch(login(form)).then((res) => {
         localStorage.setItem("token", res.payload.data.token);
       });
     } catch (error) {
@@ -36,7 +36,7 @@ const Login = () => {
   };
 
   const isFormInvalid =
-    validator(form.email, "email") || validator(form.password, "emptyField");
+    validator(form.email, "email") || validator(form.password, "password");
   return (
     <div className="login-page page">
       <form className="login-page__form" onSubmit={onLogin}>
@@ -70,4 +70,4 @@ const Login = () => {
   );
 };
 
-export default withLoadingScreen(Login);
+export default Login;
