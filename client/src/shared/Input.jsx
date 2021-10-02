@@ -1,87 +1,43 @@
-import React, { useState } from "react";
-import passwordOnIcon from "../assets/eye-outline.svg";
-import passwordOffIcon from "../assets/eye-off-outline.svg";
+import React from "react";
+import { TextField, Grid, InputAdornment, IconButton } from "@material-ui/core";
+
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
 const Input = ({
-  type,
-  label,
-  onChange,
-  disabled,
-  autoFocus,
-  value,
-  placeholder,
   name,
-  className,
-  id,
-  containerClassName,
-  hasError,
-  error,
-  onClick,
-}) => {
-  const [passwordToggle, setPasswordToggle] = useState(false);
-
-  const labelEl = label && <label className="label">{label}</label>;
-
-  // Input class name
-  const inputClassName = className ? className.split(" ") : [];
-
-  const inputContainerClassName = containerClassName
-    ? containerClassName.split(" ")
-    : [];
-
-  inputContainerClassName.push("input__container");
-
-  return (
-    <div className={inputContainerClassName.join(" ")}>
-      {labelEl}
-      <div className="input-field__input-content">
-        {type === "password" ? (
-          <>
-            <input
-              type={passwordToggle ? "text" : type}
-              name={name}
-              value={value}
-              placeholder={placeholder}
-              onChange={onChange}
-              id={id}
-              disabled={disabled}
-              autoFocus={autoFocus}
-              className={inputClassName.join(" ")}
-            />
-            <button
-              className="btn btn--transparent input-password-toggle "
-              onClick={(e) => {
-                e.preventDefault();
-                setPasswordToggle(!passwordToggle);
-              }}
-              type="button"
-            >
-              <img
-                className="input-password-toggle--icon"
-                src={passwordToggle ? passwordOnIcon : passwordOffIcon}
-                alt={"i"}
-              />
-            </button>
-          </>
-        ) : (
-          <>
-            <input
-              type={type}
-              name={name}
-              value={value}
-              placeholder={placeholder}
-              onChange={onChange}
-              disabled={disabled}
-              onClick={onClick}
-              className={inputClassName.join(" ")}
-              autoFocus={autoFocus}
-            />
-          </>
-        )}
-      </div>
-      {hasError ? <span className="error">{error}</span> : null}
-    </div>
-  );
-};
+  handleChange,
+  label,
+  half,
+  autoFocus,
+  type,
+  handleShowPassword,
+}) => (
+  <Grid item xs={12} sm={half ? 6 : 12}>
+    <TextField
+      name={name}
+      onChange={handleChange}
+      variant="outlined"
+      required
+      fullWidth
+      label={label}
+      autoFocus={autoFocus}
+      type={type}
+      InputProps={
+        name === "password"
+          ? {
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={handleShowPassword}>
+                    {type === "password" ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }
+          : null
+      }
+    />
+  </Grid>
+);
 
 export default Input;
