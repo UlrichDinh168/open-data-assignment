@@ -1,7 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import mongoose from "mongoose";
-import userRoutes from "../server/api/routes/user.js";
+import { userRoutes } from "./api/routes/user.js";
 import cors from "cors";
 import dotenv from "dotenv";
 
@@ -13,6 +13,8 @@ const app = express();
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cors());
+
+app.use("/user", userRoutes);
 
 mongoose
   .connect(process.env.MONGO_URI, {
@@ -27,7 +29,6 @@ mongoose
   .catch((error) => console.log(`${error} did not connect`));
 
 // Routes
-app.use("/user", userRoutes);
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
