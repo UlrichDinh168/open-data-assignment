@@ -19,23 +19,6 @@ const Nav = () => {
     history.push(ROUTER_PATH.LOGIN);
   };
 
-  const guestLinks = () => {
-    return (
-      <ul className="navbar-nav ml-auto">
-        <li className="nav-item">
-          <Link className="nav-link" to="/signup">
-            Sign Up
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/login">
-            Login
-          </Link>
-        </li>
-      </ul>
-    );
-  };
-
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
       <Toolbar className={classes.toolbar}>
@@ -57,7 +40,7 @@ const Nav = () => {
           <>
             <Button
               component={Link}
-              to="/login"
+              to={ROUTER_PATH.LOGIN}
               variant="contained"
               color="primary"
             >
@@ -65,7 +48,7 @@ const Nav = () => {
             </Button>
             <Button
               component={Link}
-              to="/signup"
+              to={ROUTER_PATH.SIGNUP}
               variant="contained"
               color="primary"
             >
