@@ -5,17 +5,18 @@ import useStyles from "./styles";
 
 import { useDispatch, useSelector } from "react-redux";
 import { AppBar, Typography, Toolbar, Button } from "@material-ui/core";
-import { logout } from "../actions/userActions";
+import { userActions } from "../actions";
 import { ROUTER_PATH } from "../constants";
 const Nav = () => {
+  const user = useSelector((state) => state.user.user);
+  console.log("user", user);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
 
   const logout = () => {
-    dispatch(logout());
-    localStorage.removeItem("refreshToken");
+    dispatch(userActions.logout());
     history.push(ROUTER_PATH.LOGIN);
   };
 
@@ -25,7 +26,7 @@ const Nav = () => {
         {isAuthenticated ? (
           <div className={classes.profile}>
             <Typography className={classes.userName} variant="h6">
-              Ulrich
+              {user.name}
             </Typography>
             <Button
               variant="contained"

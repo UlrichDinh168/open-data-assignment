@@ -2,34 +2,41 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 // import withLoadingScreen from "shared/components/Loading";
-import { login } from "../actions/userActions";
+import { userActions } from "../actions";
 import { validator } from "../helpers/validator";
 import { ROUTER_PATH } from "../constants";
 import Input from "../shared/Input";
-import Button from "../shared/Button";
+import useStyles from "./styles";
+
+import { Button, Paper, Grid, Typography, Container } from "@material-ui/core";
 
 const Login = () => {
   // const Login = ({ showLoading, hideLoading }) => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const classes = useStyles();
 
+  const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({
-    email: "ulrich@vertics.co",
-    password: "Carter123!!!!",
+    email: "",
+    password: "",
   });
+
+  console.log(form);
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
-  const onLogin = async (e) => {
+  const handleShowPassword = () => setShowPassword(!showPassword);
+
+  const onLogin = (e) => {
     e.preventDefault();
     try {
-      //   showLoading();
-      await dispatch(login(form)).then((res) => {
-        localStorage.setItem("token", res.payload.data.token);
-      });
+      dispatch(userActions.login(form));
+      // .then((res) => {
+      //   localStorage.setItem("token", res.payload.data.token);
+      // });
     } catch (error) {
     } finally {
-      //   hideLoading();
     }
 
     history.push(ROUTER_PATH.HOME);
@@ -37,36 +44,43 @@ const Login = () => {
 
   const isFormInvalid =
     validator(form.email, "email") || validator(form.password, "password");
-  return (
-    <div className="login-page page">
-      <form className="login-page__form" onSubmit={onLogin}>
-        <Input
-          type="email"
-          name="email"
-          placeholder="Sähköposti"
-          value={form.email}
-          onChange={handleChange}
-          hasError={validator(form.email, "email")}
-          error="email_invalid"
-        />
-        <Input
-          type="password"
-          name="password"
-          placeholder="Salasana"
-          value={form.password}
-          onChange={handleChange}
-          hasError={validator(form.password, "emptyField")}
-          error="password_invalid"
-        />
 
-        <Button
-          type="submit"
-          text="Kirjaudu"
-          onClick={onLogin}
-          disabled={isFormInvalid}
-        />
-      </form>
-    </div>
+  return (
+    <Container component="main" maxWidth="xs">
+      <Paper className={classes.paper} elevation={6}>
+        <Typography component="h1" variant="h5">
+          Sign In
+        </Typography>
+
+        <form className={classes.form} onSubmit={onLogin}>
+          <Grid container spacing={2}>
+            {" "}
+            <Input
+              name="email"
+              label="Email Address"
+              handleChange={handleChange}
+              type="email"
+            />
+            <Input
+              name="password"
+              label="Password"
+              handleChange={handleChange}
+              type={showPassword ? "text" : "password"}
+              handleShowPassword={handleShowPassword}
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Sign in
+            </Button>
+          </Grid>
+        </form>
+      </Paper>
+    </Container>
   );
 };
 
