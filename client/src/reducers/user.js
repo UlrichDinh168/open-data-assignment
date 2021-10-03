@@ -11,10 +11,11 @@ const initialState = {
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.loginSuccess:
+    case types.signupSuccess:
       return {
         ...state,
-        isAuthenticated: !isEmpty(action.payload),
-        user: action.payload,
+        isAuthenticated: true,
+        user: action.payload.data.result,
         accessToken: action.payload.token,
       };
     default:

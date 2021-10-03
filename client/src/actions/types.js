@@ -11,7 +11,7 @@ export const authTypes = {
   loginSuccess: "LOGIN_SUCCESS",
   loginFail: "LOGIN_FAIL",
 
-  signup: "SIGNUP",
+  signup: "SIGN_UP",
   signupSuccess: "SIGN_UP_SUCCESS",
   signupFail: "SIGN_UP_FAIL",
 
