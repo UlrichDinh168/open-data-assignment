@@ -28,6 +28,4 @@ if (!isProduction) {
 }
 
 // Create redux store
-const store = createStore(rootReducer, applyMiddleware(...middleware));
-
-export default store;
+export const store = createStore(rootReducer, applyMiddleware(...middleware));

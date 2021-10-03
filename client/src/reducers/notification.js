@@ -33,7 +33,3 @@ export const notificationReducer = (state = initialState, action) => {
       return state;
   }
 };
-
-export const notificationSelectors = {
-  getNotification: (state = initialState) => state.notification,
-};
