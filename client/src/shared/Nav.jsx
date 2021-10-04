@@ -9,7 +9,6 @@ import { userActions } from "../actions";
 import { ROUTER_PATH } from "../constants";
 const Nav = () => {
   const user = useSelector((state) => state.user.user);
-  console.log("user", user);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const dispatch = useDispatch();
   const history = useHistory();

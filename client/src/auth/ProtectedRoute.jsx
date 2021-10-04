@@ -7,6 +7,7 @@ const ProtectedRoute = ({
   ...rest
 }) => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  console.log("isAuthenticated", isAuthenticated);
   if (!isAuthenticated) {
     return <Redirect to={unauthenticatedRedirect} />;
   }

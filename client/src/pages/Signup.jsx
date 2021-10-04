@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { validator } from "../helpers/validator";
-import axios from "axios";
 import { withRouter } from "react-router-dom";
 
 // Actions
@@ -27,7 +26,7 @@ const SignUp = () => {
   const classes = useStyles();
 
   const [form, setForm] = useState({
-    // name:'',
+    name: "",
     email: "",
     password: "",
   });
@@ -38,37 +37,15 @@ const SignUp = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
 
   const onSignup = (e) => {
-    console.log("signed", form);
     e.preventDefault();
     return dispatch(userActions.signup(form)).then((res) => {
-      // history.push(ROUTER_PATH.HOME);
-
       const token = res?.payload?.data?.result?.accessToken;
-      console.log("token", !!token);
+      localStorage.setItem("accessToken", JSON.stringify(token));
       if (token)
         return dispatch(sensorActions.fetchAllSensors(token)).then((res) =>
           history.push(ROUTER_PATH.HOME)
         );
-      console.log("aws", token);
     });
-    // .then(() => setIsConfirmationStep(true));
-    // https://localhost:5000/user/signup
-    return axios
-      .post("http://localhost:5000/user/signup", form, {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Accept: "application/json",
-      })
-      .then((res) => {
-        console.log(res);
-        // history.push("/");
-      })
-      .catch((err) => {
-        console.log("err", err);
-        // dispatch({
-        //   type: GET_ERRORS,
-        //   payload: err.data.message,
-        // });
-      });
   };
 
   const toLoginPage = () => {

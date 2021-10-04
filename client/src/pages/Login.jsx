@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 // import withLoadingScreen from "shared/components/Loading";
-import { userActions } from "../actions";
+import { userActions, sensorActions } from "../actions";
 import { validator } from "../helpers/validator";
 import { ROUTER_PATH } from "../constants";
+import { NOTIFICATION_TYPE } from "../constants";
 import Input from "../shared/Input";
 import useStyles from "./styles";
 
@@ -22,7 +23,6 @@ const Login = () => {
     password: "",
   });
 
-  console.log(form);
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -31,15 +31,17 @@ const Login = () => {
   const onLogin = (e) => {
     e.preventDefault();
     try {
-      dispatch(userActions.login(form));
-      // .then((res) => {
-      //   localStorage.setItem("token", res.payload.data.token);
-      // });
+      dispatch(userActions.login(form)).then((res) => {
+        const token = res?.payload?.data?.result?.accessToken;
+        localStorage.setItem("accessToken", JSON.stringify(token));
+        if (token)
+          return dispatch(sensorActions.fetchAllSensors(token)).then((res) =>
+            history.push(ROUTER_PATH.HOME)
+          );
+      });
     } catch (error) {
     } finally {
     }
-
-    history.push(ROUTER_PATH.HOME);
   };
 
   const isFormInvalid =
@@ -54,7 +56,6 @@ const Login = () => {
 
         <form className={classes.form} onSubmit={onLogin}>
           <Grid container spacing={2}>
-            {" "}
             <Input
               name="email"
               label="Email Address"
@@ -68,6 +69,7 @@ const Login = () => {
               type={showPassword ? "text" : "password"}
               handleShowPassword={handleShowPassword}
             />
+
             <Button
               type="submit"
               fullWidth

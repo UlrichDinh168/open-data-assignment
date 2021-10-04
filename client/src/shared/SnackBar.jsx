@@ -32,7 +32,7 @@ export default function SimpleSnackbar() {
       <Snackbar open={open} autoHideDuration={duration} onClose={handleClose}>
         <div>
           <Alert onClose={handleClose} severity={type}>
-            {message?.response?.data?.message}
+            {message?.response?.data?.message || message}
           </Alert>
         </div>
       </Snackbar>
