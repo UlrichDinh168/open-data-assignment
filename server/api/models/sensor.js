@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 
 const sensorSchema = mongoose.Schema({
+  id: { type: String },
+
   date: {
     type: Date,
     required: true,
@@ -23,4 +25,4 @@ const sensorSchema = mongoose.Schema({
   },
 });
 
-export default mongoose.model("User", sensorSchema);
+export default mongoose.model("Sensor", sensorSchema);

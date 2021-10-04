@@ -22,7 +22,10 @@ export const signup = async (req, res, next) => {
         password,
       });
       newUser.save();
-      res.status(201).json({ message: "Signup success", result: result.data });
+      res.status(201).json({
+        message: "Signup success",
+        result: { ...result.data, name: newUser.name },
+      });
     })
     .catch((err) => {
       return res.status(400).json({ message: "Email already existed" });
