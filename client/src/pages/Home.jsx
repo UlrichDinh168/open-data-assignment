@@ -1,5 +1,4 @@
 import React from "react";
-import ChartCard from "../shared/ChartCard";
 import { Doughnut } from "react-chartjs-2";
 import { useSelector } from "react-redux";
 const Home = () => {
@@ -8,7 +7,7 @@ const Home = () => {
   const { date, ...sensors } = data;
 
   const dataset = {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    labels: Object.keys(sensors),
     datasets: [
       {
         data: Object.values(sensors),
