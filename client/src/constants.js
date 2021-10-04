@@ -5,6 +5,7 @@ export const ROUTER_PATH = {
 };
 
 export const BACKEND_BASE_URL = "http://localhost:5000";
+export const PERSIST_KEY = "root";
 
 export const NOTIFICATION_DURATION = 3000;
 

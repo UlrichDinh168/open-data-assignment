@@ -18,6 +18,10 @@ export const userReducer = (state = initialState, action) => {
         user: action.payload.data.result,
         accessToken: action.payload.token,
       };
+    case types.logout:
+      localStorage.clear();
+
+      return initialState;
     default:
       return state;
   }

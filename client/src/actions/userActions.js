@@ -27,7 +27,6 @@ export const login = (data) => {
 };
 
 export const logout = () => {
-  localStorage.removeItem("refreshToken");
   return {
     type: types.logout,
   };
