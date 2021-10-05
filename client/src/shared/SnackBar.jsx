@@ -17,7 +17,6 @@ export default function SimpleSnackbar() {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const notification = useSelector((state) => state.notification.notification);
-  console.log("notification", notification);
   useEffect(() => {
     if (notification) {
       setOpen(true);

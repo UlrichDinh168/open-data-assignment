@@ -27,6 +27,7 @@ const client = {
 };
 
 const middleware = [thunk, multiClientMiddleware(client)];
+const tools = [applyMiddleware(...middleware)];
 
 const isProduction = process.env.NODE_ENV === "production";
 if (!isProduction) {
@@ -36,7 +37,7 @@ if (!isProduction) {
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // Create redux store
-const store = createStore(persistedReducer, applyMiddleware(...middleware));
+const store = createStore(persistedReducer, compose(...tools));
 const persistor = persistStore(store);
 
 export { store, persistor };

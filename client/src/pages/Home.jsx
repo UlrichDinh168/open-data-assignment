@@ -34,7 +34,6 @@ const Home = () => {
     ],
   };
 
-  console.log("sensors", sensors);
   return (
     <div className={classes.home}>
       <h1> List of Sensors</h1>
