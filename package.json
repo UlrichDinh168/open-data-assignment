@@ -8,8 +8,8 @@
     "yarn": "1.22.11"
   },
   "scripts": {
-    "start": "node server/server.js",
-    "server": "nodemon server/server.js",
+    "start": "npm run build --prefix client && npm run server",
+    "server": "npm start --prefix server",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm start server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix server && npm install --prefix client && npm run build --prefix client"
