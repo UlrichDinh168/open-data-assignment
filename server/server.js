@@ -6,6 +6,7 @@ import { sensorRoutes } from "./api/routes/sensor.js";
 import cors from "cors";
 import dotenv from "dotenv";
 import path, { dirname } from "path";
+import { fileURLToPath } from "url";
 
 dotenv.config();
 
