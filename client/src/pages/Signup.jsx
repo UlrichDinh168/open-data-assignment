@@ -56,8 +56,12 @@ const SignUp = () => {
     });
   };
 
-  const renderForm = () => {
-    return (
+  const renderForm = () => {};
+  const isFormInvalid =
+    validator(form.email, "email") || validator(form.password, "emptyField");
+
+  return (
+    <div className="signup page">
       <Container component="main" maxWidth="xs">
         <Paper className={classes.paper} elevation={6}>
           <Typography component="h1" variant="h5">
@@ -95,11 +99,7 @@ const SignUp = () => {
           </form>
         </Paper>
       </Container>
-    );
-  };
-  const isFormInvalid =
-    validator(form.email, "email") || validator(form.password, "emptyField");
-
-  return <div className="signup page">{renderForm()}</div>;
+    </div>
+  );
 };
 export default withRouter(SignUp);
