@@ -1,0 +1,22 @@
+{
+  "name": "open-data",
+  "version": "1.0.0",
+  "description": "App tracking sensors fetched and visualize those data",
+  "scripts": {
+    "start": "npm run client-build && npm run server",
+    "server": "npm start --prefix server",
+    "server-watch": "npm run watch --prefix server",
+    "client": "npm start --prefix client",
+    "client-build": "npm run build --prefix client"
+    },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UlrichDinh168/open-data-assignment.git"
+  },
+  "author": "Ulrich",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UlrichDinh168/open-data-assignment/issues"
+  },
+  "homepage": "https://github.com/UlrichDinh168/open-data-assignment#readme"
+}
