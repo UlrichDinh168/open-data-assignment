@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { deepPurple } from "@material-ui/core/colors";
+import { deepPurple, green } from "@material-ui/core/colors";
 
 export default makeStyles((theme) => ({
   appBar: {
@@ -14,16 +14,7 @@ export default makeStyles((theme) => ({
       flexDirection: "column",
     },
   },
-  heading: {
-    color: theme.palette.primary.main,
-    textDecoration: "none",
-    fontSize: "2em",
-    fontWeight: 300,
-  },
-  image: {
-    marginLeft: "10px",
-    marginTop: "5px",
-  },
+
   toolbar: {
     display: "flex",
     justifyContent: "flex-end",
@@ -33,6 +24,7 @@ export default makeStyles((theme) => ({
     },
   },
   profile: {
+    color: "ButtonHighlight",
     display: "flex",
     justifyContent: "space-between",
     width: "400px",
@@ -43,20 +35,19 @@ export default makeStyles((theme) => ({
       justifyContent: "center",
     },
   },
+  unauthorizedContainer: {
+    display: "flex",
+    justifyContent: "space-around",
+    width: "400px",
+    alignItems: "center",
+  },
+
   logout: {
     marginLeft: "20px",
   },
-  userName: {
-    display: "flex",
-    alignItems: "center",
-    textAlign: "center",
-  },
-  brandContainer: {
-    display: "flex",
-    alignItems: "center",
-  },
+
   purple: {
-    color: theme.palette.getContrastText(deepPurple[500]),
-    backgroundColor: deepPurple[500],
+    color: theme.palette.getContrastText(green[500]),
+    backgroundColor: green[500],
   },
 }));

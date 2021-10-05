@@ -7,8 +7,6 @@
  */
 import { notificationTypes as types } from "../actions/types";
 import { NOTIFICATION_TYPE, NOTIFICATION_DURATION } from "../constants";
-// import { errorUtils } from "helpers";
-
 const initialState = {
   notification: null,
 };

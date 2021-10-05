@@ -24,9 +24,12 @@ const Nav = () => {
       <Toolbar className={classes.toolbar}>
         {isAuthenticated ? (
           <div className={classes.profile}>
-            <Typography className={classes.userName} variant="h6">
-              {user.name}
-            </Typography>
+            {user.name && (
+              <Typography className={classes.userName} variant="h6">
+                Welcome {user.name}
+              </Typography>
+            )}
+
             <Button
               variant="contained"
               className={classes.logout}
@@ -37,7 +40,7 @@ const Nav = () => {
             </Button>
           </div>
         ) : (
-          <>
+          <div className={classes.unauthorizedContainer}>
             <Button
               component={Link}
               to={ROUTER_PATH.LOGIN}
@@ -54,7 +57,7 @@ const Nav = () => {
             >
               Sign up
             </Button>
-          </>
+          </div>
         )}
       </Toolbar>
     </AppBar>

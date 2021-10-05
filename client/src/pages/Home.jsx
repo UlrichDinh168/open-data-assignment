@@ -1,8 +1,10 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
+import useStyles from "./styles";
 import { useSelector } from "react-redux";
 const Home = () => {
   const data = useSelector((state) => state.sensor.sensors)?.data?.result;
+  const classes = useStyles();
 
   const { date, ...sensors } = data;
 
@@ -34,9 +36,11 @@ const Home = () => {
 
   console.log("sensors", sensors);
   return (
-    <div className="home">
-      List of Sensors
-      <Doughnut data={dataset} />
+    <div className={classes.home}>
+      <h1> List of Sensors</h1>
+      <div className={classes.chartContainer}>
+        <Doughnut data={dataset} />
+      </div>
     </div>
   );
 };

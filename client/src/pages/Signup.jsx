@@ -3,24 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { validator } from "../helpers/validator";
 import { withRouter } from "react-router-dom";
-
 // Actions
-import { userActions, sensorActions } from "../actions";
-
+import { userActions, sensorActions, notificationActions } from "../actions";
 // Components
-
 import { Button, Paper, Grid, Typography, Container } from "@material-ui/core";
 import useStyles from "./styles";
-
 import Input from "../shared/Input";
-
 // Constants
-import { ROUTER_PATH } from "../constants";
-
+import { ROUTER_PATH, NOTIFICATION_TYPE } from "../constants";
 // Reducers
+const timeLapse = 60 * 60 * 1000; // 1 hour
 
 const SignUp = () => {
-  const [isConfirmationStep, setIsConfirmationStep] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
@@ -36,11 +30,25 @@ const SignUp = () => {
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
+  const logout = () => {
+    dispatch(userActions.logout());
+    history.push(ROUTER_PATH.LOGIN);
+  };
+
   const onSignup = (e) => {
     e.preventDefault();
     return dispatch(userActions.signup(form)).then((res) => {
       const token = res?.payload?.data?.result?.accessToken;
       localStorage.setItem("accessToken", JSON.stringify(token));
+      setTimeout(() => {
+        logout();
+        dispatch(
+          notificationActions.showNotification({
+            type: NOTIFICATION_TYPE.warning,
+            message: "Token has expired. Please login again",
+          })
+        );
+      }, timeLapse);
       if (token)
         return dispatch(sensorActions.fetchAllSensors(token)).then((res) =>
           history.push(ROUTER_PATH.HOME)
@@ -48,23 +56,6 @@ const SignUp = () => {
     });
   };
 
-  const toLoginPage = () => {
-    history.push(ROUTER_PATH.LOGIN);
-    setIsConfirmationStep(false);
-  };
-
-  const renderConfirmation = () => {
-    return (
-      <div className="container">
-        <div className="description">Account_has_been_created</div>
-        <Button
-          text="Go to login"
-          onClick={toLoginPage}
-          disabled={isFormInvalid}
-        />
-      </div>
-    );
-  };
   const renderForm = () => {
     return (
       <Container component="main" maxWidth="xs">
@@ -109,10 +100,6 @@ const SignUp = () => {
   const isFormInvalid =
     validator(form.email, "email") || validator(form.password, "emptyField");
 
-  return (
-    <div className="signup page">
-      {isConfirmationStep ? renderConfirmation() : renderForm()}
-    </div>
-  );
+  return <div className="signup page">{renderForm()}</div>;
 };
 export default withRouter(SignUp);
