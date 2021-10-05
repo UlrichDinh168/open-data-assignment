@@ -5,7 +5,7 @@ import { userRoutes } from "./api/routes/user.js";
 import { sensorRoutes } from "./api/routes/sensor.js";
 import cors from "cors";
 import dotenv from "dotenv";
-import path from "path";
+// import path from "path";
 
 dotenv.config();
 
@@ -61,10 +61,10 @@ app.use((error, req, res, next) => {
   });
 });
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.resolve(__dirname, "../client", "build")));
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.resolve(__dirname, "../client", "build")));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
-  });
-}
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
+//   });
+// }
