@@ -5,7 +5,7 @@ import { userRoutes } from "./api/routes/user.js";
 import { sensorRoutes } from "./api/routes/sensor.js";
 import cors from "cors";
 import dotenv from "dotenv";
-import path from "path";
+import path, { dirname } from "path";
 
 dotenv.config();
 
@@ -60,6 +60,8 @@ app.use((error, req, res, next) => {
     },
   });
 });
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.resolve(__dirname, "../client", "build")));
