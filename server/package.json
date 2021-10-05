@@ -5,7 +5,6 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js"
   },
   "keywords": [
@@ -13,7 +12,6 @@
     "restful",
     "api"
   ],
-  "author": "Ulrich",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.22.0",
