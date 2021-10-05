@@ -2,6 +2,11 @@
   "name": "open-data",
   "version": "1.0.0",
   "description": "App tracking sensors fetched and visualize those data",
+  "engines": {
+    "node": "14.17.6",
+    "npm": "6.14.15",
+    "yarn": "1.22.11"
+  },
   "scripts": {
     "start": "npm run client-build && npm run server",
     "server": "npm start server",
