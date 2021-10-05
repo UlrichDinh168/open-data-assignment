@@ -24,4 +24,3 @@ This application is to retrieve the access via JWT token using `/api/signup` or 
 
 - `npm run server` or `yarn server`: Start the server.
 - `npm run client` or `yarn client`: Start the client.
-- `npm start` or `yarn start`: Build the client project first, then serve it with the local server.
