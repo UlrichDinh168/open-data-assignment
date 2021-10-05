@@ -7,7 +7,9 @@
     "server": "npm start server",
     "server-watch": "npm run watch server",
     "client": "npm start client",
-    "client-build": "npm run build client"
+    "client-build": "npm run build client",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix server && npm install --prefix client && npm run build --prefix client"
+
     },
   "repository": {
     "type": "git",
