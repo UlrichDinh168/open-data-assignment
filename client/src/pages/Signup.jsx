@@ -3,21 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { validator } from "../helpers/validator";
 import { withRouter } from "react-router-dom";
-
 // Actions
-import { userActions, sensorActions } from "../actions";
-
+import { userActions, sensorActions, notificationActions } from "../actions";
 // Components
-
 import { Button, Paper, Grid, Typography, Container } from "@material-ui/core";
 import useStyles from "./styles";
-
 import Input from "../shared/Input";
-
 // Constants
-import { ROUTER_PATH } from "../constants";
-
+import { ROUTER_PATH, NOTIFICATION_TYPE } from "../constants";
 // Reducers
+const timeLapse = 60 * 60 * 1000; // 1 hour
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -35,11 +30,25 @@ const SignUp = () => {
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
+  const logout = () => {
+    dispatch(userActions.logout());
+    history.push(ROUTER_PATH.LOGIN);
+  };
+
   const onSignup = (e) => {
     e.preventDefault();
     return dispatch(userActions.signup(form)).then((res) => {
       const token = res?.payload?.data?.result?.accessToken;
       localStorage.setItem("accessToken", JSON.stringify(token));
+      setTimeout(() => {
+        logout();
+        dispatch(
+          notificationActions.showNotification({
+            type: NOTIFICATION_TYPE.warning,
+            message: "Token has expired. Please login again",
+          })
+        );
+      }, timeLapse);
       if (token)
         return dispatch(sensorActions.fetchAllSensors(token)).then((res) =>
           history.push(ROUTER_PATH.HOME)
