@@ -4,10 +4,10 @@
   "description": "App tracking sensors fetched and visualize those data",
   "scripts": {
     "start": "npm run client-build && npm run server",
-    "server": "npm start --prefix server",
-    "server-watch": "npm run watch --prefix server",
-    "client": "npm start --prefix client",
-    "client-build": "npm run build --prefix client"
+    "server": "npm start server",
+    "server-watch": "npm run watch server",
+    "client": "npm start client",
+    "client-build": "npm run build client"
     },
   "repository": {
     "type": "git",
