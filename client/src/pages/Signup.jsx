@@ -20,7 +20,6 @@ import { ROUTER_PATH } from "../constants";
 // Reducers
 
 const SignUp = () => {
-  const [isConfirmationStep, setIsConfirmationStep] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
@@ -48,23 +47,6 @@ const SignUp = () => {
     });
   };
 
-  const toLoginPage = () => {
-    history.push(ROUTER_PATH.LOGIN);
-    setIsConfirmationStep(false);
-  };
-
-  const renderConfirmation = () => {
-    return (
-      <div className="container">
-        <div className="description">Account_has_been_created</div>
-        <Button
-          text="Go to login"
-          onClick={toLoginPage}
-          disabled={isFormInvalid}
-        />
-      </div>
-    );
-  };
   const renderForm = () => {
     return (
       <Container component="main" maxWidth="xs">
@@ -109,10 +91,6 @@ const SignUp = () => {
   const isFormInvalid =
     validator(form.email, "email") || validator(form.password, "emptyField");
 
-  return (
-    <div className="signup page">
-      {isConfirmationStep ? renderConfirmation() : renderForm()}
-    </div>
-  );
+  return <div className="signup page">{renderForm()}</div>;
 };
 export default withRouter(SignUp);
