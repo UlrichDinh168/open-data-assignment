@@ -32,8 +32,6 @@ mongoose
   )
   .catch((error) => console.log(`${error} did not connect`));
 
-// Routes
-
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(

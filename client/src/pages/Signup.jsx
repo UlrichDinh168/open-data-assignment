@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { validator } from "../helpers/validator";
+// import { validator } from "../helpers/validator";
 import { withRouter } from "react-router-dom";
 // Actions
 import { userActions, sensorActions, notificationActions } from "../actions";
@@ -56,9 +56,9 @@ const SignUp = () => {
     });
   };
 
-  const renderForm = () => {};
-  const isFormInvalid =
-    validator(form.email, "email") || validator(form.password, "emptyField");
+  // const renderForm = () => {};
+  // const isFormInvalid =
+  //   validator(form.email, "email") || validator(form.password, "emptyField");
 
   return (
     <div className="signup page">

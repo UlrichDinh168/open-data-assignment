@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 // import withLoadingScreen from "shared/components/Loading";
 import { userActions, sensorActions, notificationActions } from "../actions";
-import { validator } from "../helpers/validator";
+// import { validator } from "../helpers/validator";
 import { ROUTER_PATH, NOTIFICATION_TYPE } from "../constants";
 import Input from "../shared/Input";
 import useStyles from "./styles";
@@ -58,8 +58,8 @@ const Login = () => {
     }
   };
 
-  const isFormInvalid =
-    validator(form.email, "email") || validator(form.password, "password");
+  // const isFormInvalid =
+  //   validator(form.email, "email") || validator(form.password, "password");
 
   return (
     <Container component="main" maxWidth="xs">
