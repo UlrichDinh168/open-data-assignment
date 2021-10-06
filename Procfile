@@ -1,1 +1,1 @@
-web: nodemon server/server.js
+web: cd server && npm run start
