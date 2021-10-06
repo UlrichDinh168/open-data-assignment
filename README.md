@@ -27,7 +27,7 @@ Live demo: https://open-data-ulrich.netlify.app/
 - `npm run server` or `yarn server`: Start the server.
 - `npm run client` or `yarn client`: Start the client.
 
-**Note on updates:
+## Note on updates:
 - Add databse to store previous fetched sensors.
 - Users able to select date to see corresponding sensors.
 - Multiple charts for selection (Bar, Column, Line, etc.).
