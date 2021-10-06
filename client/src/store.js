@@ -20,7 +20,7 @@ const persistConfig = {
 const client = {
   default: {
     client: axios.create({
-      baseURL: baseURL,
+      baseURL: "https://open-data-ulrich.herokuapp.com",
       responseType: "json",
     }),
   },
