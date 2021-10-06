@@ -26,7 +26,6 @@ export default makeStyles((theme) => ({
     color: "ButtonHighlight",
     display: "flex",
     justifyContent: "space-between",
-    width: "400px",
     alignItems: "center",
     [theme.breakpoints.down("sm")]: {
       width: "auto",
