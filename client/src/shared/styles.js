@@ -27,6 +27,7 @@ export default makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    width: "0",
     [theme.breakpoints.down("sm")]: {
       width: "auto",
       marginTop: 20,
