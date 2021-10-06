@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import { rootReducer } from "./reducers";
-import { BACKEND_BASE_URL, PERSIST_KEY } from "./constants";
+import { PERSIST_KEY } from "./constants";
 import { multiClientMiddleware } from "redux-axios-middleware";
 import { persistStore, persistReducer } from "redux-persist";
 import { createLogger } from "redux-logger";
