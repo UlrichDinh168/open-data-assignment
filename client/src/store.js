@@ -9,7 +9,7 @@ import storage from "redux-persist/lib/storage";
 import axios from "axios";
 // Define middleware to use
 
-const baseURL = BACKEND_BASE_URL || "http://localhost:5000";
+const baseURL = process.env.baseURL || "http://localhost:5000";
 
 // Config redux-persist
 const persistConfig = {
@@ -20,7 +20,7 @@ const persistConfig = {
 const client = {
   default: {
     client: axios.create({
-      baseURL: "https://open-data-ulrich.herokuapp.com",
+      baseURL: baseURL,
       responseType: "json",
     }),
   },
