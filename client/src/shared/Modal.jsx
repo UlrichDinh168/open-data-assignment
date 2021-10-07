@@ -1,8 +1,7 @@
 import React from "react";
-
-import Button from "./Button";
 import "./Modal.css";
-export default ({
+
+export const Modal = ({
   children,
   show,
   closeModal,
@@ -42,13 +41,13 @@ export default ({
   if (modalContainerClassName) {
     modalContainerClass.push(modalContainerClassName);
   }
-  const closeButtonClick = (e) => {
-    e.stopPropagation();
+  //   const closeButtonClick = (e) => {
+  //     e.stopPropagation();
 
-    if (closeModal) {
-      closeModal();
-    }
-  };
+  //     if (closeModal) {
+  //       closeModal();
+  //     }
+  //   };
   return (
     <div className={modalWrapperClass.join(" ")} onClick={onModalClick}>
       <div className={modalContainerClass.join(" ")} onClick={onContentClick}>
