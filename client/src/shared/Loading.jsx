@@ -4,7 +4,7 @@ import hoistNonReactStatics from "hoist-non-react-statics";
 import { css } from "@emotion/react";
 import PuffLoader from "react-spinners/PuffLoader";
 import "./loading.css";
-import Modal from "./Modal";
+import { Modal } from "./Modal";
 const override = css`
   display: block;
   margin: 0 auto;
