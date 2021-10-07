@@ -1,0 +1,67 @@
+.modal__wrapper {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.7); /* Black w/ opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal__container {
+  align-items: center;
+  background-color: white;
+  width: 85%;
+  height: 70%;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.modal__header {
+  position: relative;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.modal__header .modal__close-button-container {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.modal__footer {
+  margin-top: 1rem;
+}
+
+.modal__content {
+  max-height: calc(100vh - 22rem);
+  overflow-y: scroll;
+}
+/* modal__content::content {
+		animation: {
+			name: animate-top;
+			duration: 0.4s;
+		}
+	} */
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+/* Add Animation */
+@keyframes animate-top {
+  from {
+    top: -100%;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}

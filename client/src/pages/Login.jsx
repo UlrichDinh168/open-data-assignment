@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-// import withLoadingScreen from "shared/components/Loading";
+import withLoadingScreen from "../shared/Loading";
 import { userActions, sensorActions, notificationActions } from "../actions";
 // import { validator } from "../helpers/validator";
 import { ROUTER_PATH, NOTIFICATION_TYPE } from "../constants";
@@ -11,8 +11,8 @@ import { Button, Paper, Grid, Typography, Container } from "@material-ui/core";
 
 const timeLapse = 60 * 60 * 1000; // 1 hour
 
-const Login = () => {
-  // const Login = ({ showLoading, hideLoading }) => {
+// const Login = () => {
+const Login = ({ showLoading, hideLoading }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -33,10 +33,11 @@ const Login = () => {
 
   const handleShowPassword = () => setShowPassword(!showPassword);
 
-  const onLogin = (e) => {
+  const onLogin = async (e) => {
     e.preventDefault();
     try {
-      dispatch(userActions.login(form)).then((res) => {
+      showLoading();
+      await dispatch(userActions.login(form)).then((res) => {
         const token = res?.payload?.data?.result?.accessToken;
         localStorage.setItem("accessToken", JSON.stringify(token));
         setTimeout(() => {
@@ -45,16 +46,17 @@ const Login = () => {
             notificationActions.showNotification({
               type: NOTIFICATION_TYPE.warning,
               message: "Token has expired. Please login again",
-            })
+            }),
           );
         }, timeLapse);
         if (token)
           return dispatch(sensorActions.fetchAllSensors(token)).then((res) =>
-            history.push(ROUTER_PATH.HOME)
+            history.push(ROUTER_PATH.HOME),
           );
       });
     } catch (error) {
     } finally {
+      hideLoading();
     }
   };
 
@@ -100,4 +102,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default withLoadingScreen(Login);

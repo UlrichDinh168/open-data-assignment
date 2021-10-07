@@ -1,0 +1,12 @@
+.loading-hoc__container {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  height: 100%;
+}
+.loading-hoc__container .modal__container {
+  box-shadow: none;
+  background-color: transparent;
+  width: auto;
+  height: auto;
+}

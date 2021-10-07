@@ -9,7 +9,7 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import ProtectedRoute from "./auth/ProtectedRoute";
-
+import Snackbar from "./shared/SnackBar";
 const App = () => {
   return (
     <Provider store={store}>
@@ -21,7 +21,7 @@ const App = () => {
           <ProtectedRoute exact path={ROUTER_PATH.HOME} component={Home} />
         </Switch>
       </Router>
-      {/* <SnackBar /> */}
+      <Snackbar />
     </Provider>
   );
 };
