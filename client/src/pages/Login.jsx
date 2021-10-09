@@ -37,32 +37,23 @@ const Login = ({ showLoading, hideLoading }) => {
     e.preventDefault();
     try {
       showLoading();
-      await dispatch(userActions.login(form))
-        .then((res) => {
-          const token = res?.payload?.data?.result?.accessToken;
-          localStorage.setItem("accessToken", JSON.stringify(token));
-          setTimeout(() => {
-            logout();
-            dispatch(
-              notificationActions.showNotification({
-                type: NOTIFICATION_TYPE.warning,
-                message: "Token has expired. Please login again",
-              }),
-            );
-          }, timeLapse);
-          if (token)
-            return dispatch(sensorActions.fetchAllSensors(token)).then((res) =>
-              history.push(ROUTER_PATH.HOME),
-            );
-        })
-        .then(() => {
+      await dispatch(userActions.login(form)).then((res) => {
+        const token = res?.payload?.data?.result?.accessToken;
+        localStorage.setItem("accessToken", JSON.stringify(token));
+        setTimeout(() => {
+          logout();
           dispatch(
             notificationActions.showNotification({
-              type: NOTIFICATION_TYPE.success,
-              message: "Login success",
+              type: NOTIFICATION_TYPE.warning,
+              message: "Token has expired. Please login again",
             }),
           );
-        });
+        }, timeLapse);
+        if (token)
+          return dispatch(sensorActions.fetchAllSensors(token)).then((res) =>
+            history.push(ROUTER_PATH.HOME),
+          );
+      });
     } catch (error) {
     } finally {
       hideLoading();
