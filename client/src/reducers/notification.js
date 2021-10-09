@@ -12,12 +12,13 @@ const initialState = {
 };
 
 export const notificationReducer = (state = initialState, action) => {
+  console.log("action", action);
   if (action.type.endsWith("_FAIL")) {
     return {
       ...state,
       notification: {
         type: NOTIFICATION_TYPE.error,
-        message: action.error,
+        message: action?.error?.response?.data?.message,
         duration: NOTIFICATION_DURATION,
       },
     };

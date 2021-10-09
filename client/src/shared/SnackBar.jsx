@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+
+// import Snackbar from "@material-ui/core/Snackbar";
+// import MuiAlert from "@material-ui/lab/Alert";
 // actions
 import { notificationActions } from "../actions";
 
-// const Alert = (props) => {
+// function Alert(props) {
 //   return <MuiAlert elevation={6} variant="filled" {...props} />;
-// };
+// }
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -34,13 +37,16 @@ export default function SimpleSnackbar() {
     return null;
   }
 
+  // {message?.response?.data?.message || message}
   const { message, duration, type } = notification;
+  console.log("message", message);
+
   return (
     <div className="snackbar">
       <Snackbar open={open} autoHideDuration={duration} onClose={handleClose}>
         <div>
           <Alert onClose={handleClose} severity={type}>
-            {message?.response?.data?.message || message}
+            {message ? message : message.message}
           </Alert>
         </div>
       </Snackbar>

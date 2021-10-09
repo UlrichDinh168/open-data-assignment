@@ -24,7 +24,6 @@ const withLoadingScreen = (WrapperComponent) => {
     componentDidMount() {
       this.mounted = true;
     }
-    x1;
 
     componentWillUnmount() {
       this.mounted = false;
@@ -34,7 +33,6 @@ const withLoadingScreen = (WrapperComponent) => {
     }
 
     showLoading = (ignoreTimeout = false) => {
-      console.log("show");
       this.setState(
         {
           loading: true,
@@ -55,8 +53,6 @@ const withLoadingScreen = (WrapperComponent) => {
     };
 
     hideLoading = (callback = null) => {
-      console.log("hdie");
-
       if (callback !== null) {
         this.setState({
           loading: false,
