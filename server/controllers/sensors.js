@@ -5,6 +5,7 @@ import SensorModel from "../api/models/sensor.js";
 export const fetchSensors = async (req, res) => {
   const token = getToken(req);
 
+  console.log("req", req);
   axios({
     method: "GET",
     url: "https://opendata.hopefully.works/api/events",

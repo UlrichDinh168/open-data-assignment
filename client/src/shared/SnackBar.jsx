@@ -37,9 +37,7 @@ export default function SimpleSnackbar() {
     return null;
   }
 
-  // {message?.response?.data?.message || message}
   const { message, duration, type } = notification;
-  console.log("message", message);
 
   return (
     <div className="snackbar">

@@ -12,7 +12,6 @@ const initialState = {
 };
 
 export const notificationReducer = (state = initialState, action) => {
-  console.log("action", action);
   if (action.type.endsWith("_FAIL")) {
     return {
       ...state,
