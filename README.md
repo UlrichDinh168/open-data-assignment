@@ -8,6 +8,7 @@ Live demo: https://open-data-ulrich.netlify.app/
 
 - **Front-end:** React, Redux.
 - **Back-end:** Node.js (Express).
+- **Deployment:** Heroku for Backend deployment && Netlify for Frontend.
 
 ## Folder structure
 
@@ -24,8 +25,10 @@ Live demo: https://open-data-ulrich.netlify.app/
 
 **Start:**
 
-- `npm run server` or `yarn server`: Start the server.
-- `npm run client` or `yarn client`: Start the client.
+- `npm install` or `sudo npm install` at the root of the folder will automatically install all dependencies for frontend and backend. 
+- `npm run dev` will start the application immediately (run both frontend & backend simultaneously).
+- `npm start` will create a `build` folder and serve it within the static server (localhost:5000).
+- In case the port is already used and didn't close properly, which led to `listen EADDRINUSE: address already in use :::5000`, run `lsof -i tcp:5000 ` in terminal and kill the process `kill -9 <PID>` or `sudo kill -9 <PID>`
 
 ## Note on updates:
 - Add databse to store previous fetched sensors.
