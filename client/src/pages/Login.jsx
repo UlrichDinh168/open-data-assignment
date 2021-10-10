@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import withLoadingScreen from "../shared/Loading";
+// import withLoadingScreen from "../shared/Loading";
 import { userActions, sensorActions, notificationActions } from "../actions";
 // import { validator } from "../helpers/validator";
 import { ROUTER_PATH, NOTIFICATION_TYPE } from "../constants";
@@ -102,4 +102,4 @@ const Login = ({ showLoading, hideLoading }) => {
   );
 };
 
-export default withLoadingScreen(Login);
+export default Login;
