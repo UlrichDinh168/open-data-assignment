@@ -11,63 +11,29 @@ const override = css`
   border-color: red;
 `;
 const withLoadingScreen = (WrapperComponent) => {
-  class LoadingScreen extends React.PureComponent {
-    constructor() {
-      super();
-      this.state = {
-        loading: false,
+  const LoadingScreen = () => {
+    const [loading, setLoading] = React.useState(false);
+    let mounted = false;
+    let closeLoadingTimeout = null;
+
+    React.useEffect(() => {
+      mounted = true;
+      return () => {
+        if (closeLoadingTimeout) {
+          clearTimeout(closeLoadingTimeout);
+        }
       };
-      this.mounted = false;
-      this.closeLoadingTimeout = null;
-    }
+    }, [loading]);
 
-    componentDidMount() {
-      this.mounted = true;
-    }
-
-    componentWillUnmount() {
-      this.mounted = false;
-      if (this.closeLoadingTimeout) {
-        clearTimeout(this.closeLoadingTimeout);
-      }
-    }
-
-    showLoading = (ignoreTimeout = false) => {
-      this.setState(
-        {
-          loading: true,
-        },
-        () => {
-          if (ignoreTimeout) {
-            return;
-          }
-          this.closeLoadingTimeout = setTimeout(() => {
-            if (this.mounted) {
-              this.setState({
-                loading: false,
-              });
-            }
-          }, 1000000);
-        },
-      );
+    const showLoading = (ignoreTimeout = false) => {
+      setLoading(true);
     };
 
-    hideLoading = (callback = null) => {
-      if (callback !== null) {
-        this.setState({
-          loading: false,
-        });
-      } else {
-        this.setState(
-          {
-            loading: false,
-          },
-          callback,
-        );
-      }
+    const hideLoading = () => {
+      setLoading(false);
     };
 
-    renderLoading = () => {
+    const renderLoading = () => {
       return (
         <PuffLoader
           css={override}
@@ -77,27 +43,23 @@ const withLoadingScreen = (WrapperComponent) => {
         />
       );
     };
-
-    render() {
-      const newProps = {
-        showLoading: this.showLoading,
-        hideLoading: this.hideLoading,
-      };
-      return (
-        <div className="loading-hoc__container">
-          <Modal
-            show={this.state.loading}
-            className={"loading-modal__container"}
-            showClose={false}
-          >
-            {this.renderLoading()}
-          </Modal>
-          <WrapperComponent {...this.props} {...newProps} />
-        </div>
-      );
-    }
-  }
-
+    const newProps = {
+      showLoading,
+      hideLoading,
+    };
+    return (
+      <div className="loading-hoc__container">
+        <Modal
+          show={loading}
+          className={"loading-modal__container"}
+          showClose={false}
+        >
+          {renderLoading()}
+        </Modal>
+        <WrapperComponent {...this.props} {...newProps} />
+      </div>
+    );
+  };
   hoistNonReactStatics(LoadingScreen, WrapperComponent);
   return LoadingScreen;
 };
