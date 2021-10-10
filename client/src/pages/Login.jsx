@@ -36,7 +36,7 @@ const Login = ({ showLoading, hideLoading }) => {
   const onLogin = async (e) => {
     e.preventDefault();
     try {
-      showLoading();
+      // showLoading();
       await dispatch(userActions.login(form)).then((res) => {
         const token = res?.payload?.data?.result?.accessToken;
         localStorage.setItem("accessToken", JSON.stringify(token));
@@ -56,7 +56,7 @@ const Login = ({ showLoading, hideLoading }) => {
       });
     } catch (error) {
     } finally {
-      hideLoading();
+      // hideLoading();
     }
   };
 
