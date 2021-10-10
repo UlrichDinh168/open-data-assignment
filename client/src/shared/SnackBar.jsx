@@ -38,13 +38,13 @@ export default function SimpleSnackbar() {
   }
 
   const { message, duration, type } = notification;
-
+  console.log(message);
   return (
     <div className="snackbar">
       <Snackbar open={open} autoHideDuration={duration} onClose={handleClose}>
         <div>
           <Alert onClose={handleClose} severity={type}>
-            {message ? message : message.message}
+            {message ? message : null}
           </Alert>
         </div>
       </Snackbar>

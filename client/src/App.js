@@ -21,6 +21,7 @@ const App = () => {
           <ProtectedRoute exact path={ROUTER_PATH.HOME} component={Home} />
         </Switch>
       </Router>
+      <Snackbar />
     </Provider>
   );
 };
