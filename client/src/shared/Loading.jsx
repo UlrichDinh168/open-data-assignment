@@ -25,7 +25,7 @@ const withLoadingScreen = (WrapperComponent) => {
       };
     }, [loading]);
 
-    const showLoading = (ignoreTimeout = false) => {
+    const showLoading = () => {
       setLoading(true);
     };
 
@@ -39,7 +39,7 @@ const withLoadingScreen = (WrapperComponent) => {
           css={override}
           size={400}
           color="#2C6CAF"
-          loading={this.state.loading}
+          loading={loading}
         />
       );
     };
@@ -56,7 +56,7 @@ const withLoadingScreen = (WrapperComponent) => {
         >
           {renderLoading()}
         </Modal>
-        <WrapperComponent {...this.props} {...newProps} />
+        <WrapperComponent {...newProps} />
       </div>
     );
   };

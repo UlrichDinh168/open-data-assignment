@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-// import withLoadingScreen from "../shared/Loading";
+import withLoadingScreen from "../shared/Loading";
 import { userActions, sensorActions, notificationActions } from "../actions";
 // import { validator } from "../helpers/validator";
 import { ROUTER_PATH, NOTIFICATION_TYPE } from "../constants";
@@ -36,7 +36,7 @@ const Login = ({ showLoading, hideLoading }) => {
   const onLogin = async (e) => {
     e.preventDefault();
     try {
-      // showLoading();
+      showLoading();
       await dispatch(userActions.login(form)).then((res) => {
         const token = res?.payload?.data?.result?.accessToken;
         localStorage.setItem("accessToken", JSON.stringify(token));
@@ -56,7 +56,7 @@ const Login = ({ showLoading, hideLoading }) => {
       });
     } catch (error) {
     } finally {
-      // hideLoading();
+      hideLoading();
     }
   };
 
@@ -102,4 +102,4 @@ const Login = ({ showLoading, hideLoading }) => {
   );
 };
 
-export default Login;
+export default withLoadingScreen(Login);
